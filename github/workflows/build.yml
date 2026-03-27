@@ -21,8 +21,14 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
       
+      - name: Verify gradle.properties
+        run: cat gradle.properties
+      
       - name: Make gradlew executable
         run: chmod +x gradlew
+      
+      - name: Clean build
+        run: ./gradlew clean
       
       - name: Build APK
         run: ./gradlew assembleDebug --no-daemon
