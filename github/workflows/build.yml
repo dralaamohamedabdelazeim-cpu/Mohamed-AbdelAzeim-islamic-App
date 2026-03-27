@@ -21,17 +21,18 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
       
-      - name: Verify gradle.properties
-        run: cat gradle.properties
+      - name: Override gradle.properties
+        run: |
+          echo "org.gradle.jvmargs=-Xmx2048m -XX:MaxMetaspaceSize=512m" > gradle.properties
+          echo "android.useAndroidX=true" >> gradle.properties
+          echo "android.enableJetifier=true" >> gradle.properties
+          cat gradle.properties
       
       - name: Make gradlew executable
         run: chmod +x gradlew
       
-      - name: Clean build
-        run: ./gradlew clean
-      
       - name: Build APK
-        run: ./gradlew assembleDebug --no-daemon
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
       
       - name: Upload APK
         uses: actions/upload-artifact@v4
