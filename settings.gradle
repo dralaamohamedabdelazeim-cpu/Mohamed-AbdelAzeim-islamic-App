@@ -1,2 +1,4 @@
-rootProject.name = "IslamicApp"
-include ':app'
+Xmx2048m -XX:MaxMetaspaceSize=512m
+org.gradle.daemon=false
+android.useAndroidX=true
+android.enableJetifier=true
