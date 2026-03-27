@@ -25,9 +25,11 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build APK
-        run: ./gradlew assembleDebug
-        env:
-          GRADLE_OPTS: ""
+        run: |
+          unset GRADLE_OPTS
+          unset _JAVA_OPTIONS
+          unset JAVA_TOOL_OPTIONS
+          ./gradlew assembleDebug --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
